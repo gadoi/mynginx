@@ -1,0 +1,57 @@
+INSTALL MODSECURITY on APACHE vs NGINX
+
+https://phoenixnap.com/kb/setup-configure-modsecurity-on-apache
+https://hostadvice.com/how-to/how-to-setup-modsecurity-for-apache-on-ubuntu-18-04/
+https://geekflare.com/nginx-webserver-security-hardening-guide/
+https://geekflare.com/install-modsecurity-on-nginx/
+https://www.nginx.com/blog/compiling-and-installing-modsecurity-for-open-source-nginx/
+https://docs.nginx.com/nginx-waf/admin-guide/nginx-plus-modsecurity-waf-owasp-crs/
+https://geekflare.com/nginx-production-configuration/
+
+https://geekflare.com/nginx-production-configuration/
+
+sudo apt-get install libapache2-mod-security2
+sudo apachectl -M | grep security
+sudo apachectl -M | grep --color security2
+
+You should get the below output:
+security2_module (shared)
+
+Configuring ModSecurity
+sudo cp /etc/modsecurity/modsecurity.conf-recommended /etc/modsecurity/modsecurity.conf
+sudo nano /etc/modsecurity/modsecurity.conf
+Top
+Change the value of SecRuleEngine from DetectionOnly to On.
+$ SecRuleEngine = on
+
+sudo sed -i "s/SecResponseBodyAccess On/SecResponseBodyAccess Off/" /etc/modsecurity/modsecurity.conf
+
+sudo systemctl restart apache2
+
+sudo mv /usr/share/modsecurity-crs /usr/share/modsecurity-crs.bk
+ sudo git clone https://github.com/SpiderLabs/owasp-modsecurity-crs.git /usr/share/modsecurity-crs
+
+sudo cp /usr/share/modsecurity-crs/crs-setup.conf.example /usr/share/modsecurity-crs/crs-setup.conf
+
+$ sudo nano /etc/apache2/mods-enabled/security2.conf
+
+Add the following two lines at the end
+
+IncludeOptional /usr/share/modsecurity-crs/*.conf
+IncludeOptional "/usr/share/modsecurity-crs/rules/*.conf
+
+Test Apache Configuration
+
+1. Open the default Apache configuration file:
+
+sudo nano /etc/apache2/sites-available/000-default.conf
+
+######
+SecRuleEngine On
+SecRule ARGS:testparam "@contains test" "id:1234,deny,status:403,msg:'phoenixNAP test rule was triggered'"
+######
+
+curl localhost/index.html?testparam=test
+curl localhost/index.html?exec=/bin/bash
+
+sudo tail -f /var/log/apache2/error.log
