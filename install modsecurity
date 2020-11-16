@@ -55,3 +55,88 @@ curl localhost/index.html?testparam=test
 curl localhost/index.html?exec=/bin/bash
 
 sudo tail -f /var/log/apache2/error.log
+
+INSTALL MODSECURITY for NGINX
+https://techexpert.tips/nginx/nginx-modsecurity-installation/
+https://github.com/SpiderLabs/ModSecurity-nginx
+
+mkdir /downloads
+cd /downloads
+git clone https://github.com/ssdeep-project/ssdeep
+cd ssdeep/
+./bootstrap
+autoreconf -i
+./configure
+make
+make install
+ 
+cd /downloads
+git clone https://github.com/SpiderLabs/ModSecurity 
+cd ModSecurity 
+git checkout -b v3/master origin/v3/master 
+git submodule init 
+git submodule update 
+
+sh build.sh 
+autoreconf -i
+./configure 
+make
+make install
+
+cd /downloads
+git clone https://github.com/SpiderLabs/ModSecurity-nginx
+
+cd /downloads
+wget http://nginx.org/download/nginx-1.18.0.tar.gz
+tar -zxvf nginx-1.18.0.tar.gz
+
+cd nginx-1.18.0
+./configure --with-compat --add-dynamic-module=../ModSecurity-nginx <--error
+./configure --add-dynamic-module=../ModSecurity-nginx --with-compat
+make modules
+cp objs/ngx_http_modsecurity_module.so /usr/share/nginx/modules/
+
+cd /downloads
+wget https://github.com/SpiderLabs/owasp-modsecurity-crs/archive/v3.2.0.tar.gz
+tar -zxvf v3.2.0.tar.gz
+mv owasp-modsecurity-crs-3.2.0 owasp-modsecurity-crs
+mv owasp-modsecurity-crs/crs-setup.conf.example owasp-modsecurity-crs/crs-setup.conf
+mv owasp-modsecurity-crs/rules/REQUEST-900-EXCLUSION-RULES-BEFORE-CRS.conf.example  owasp-modsecurity-crs/rules/REQUEST-900-EXCLUSION-RULES-BEFORE-CRS.conf
+mv owasp-modsecurity-crs /usr/local/
+
+vi /etc/nginx/nginx.conf
+
+load_module modules/ngx_http_modsecurity_module.so;
+
+mkdir -p /etc/nginx/modsec
+cp ModSecurity/unicode.mapping /etc/nginx/modsec/
+cp ModSecurity/modsecurity.conf-recommended /etc/nginx/modsec/modsecurity.conf
+
+vi /etc/nginx/modsec/modsecurity.conf
+
+Locate the following lines.
+SecRuleEngine DetectionOnly
+SecAuditLog /var/log/modsec_audit.log
+
+Change these lines to the following configuration.
+SecRuleEngine On
+SecAuditLog /var/log/nginx/modsec_audit.log
+
+vi /etc/nginx/modsec/main.conf
+
+Include "/etc/nginx/modsec/modsecurity.conf"
+Include "/usr/local/owasp-modsecurity-crs/crs-setup.conf"
+Include "/usr/local/owasp-modsecurity-crs/rules/*.conf"
+
+Add line
+modsecurity on;
+modsecurity_rules_file /etc/nginx/modsec/main.conf;
+
+service nginx restart
+tail -f /var/log/nginx/modsec_audit.log
+
+error
+export MODSECURITY_LIB="/usr/src/ModSecurity/src/.libs/"
+export MODSECURITY_INC="/usr/src/ModSecurity/headers/"
+
+
