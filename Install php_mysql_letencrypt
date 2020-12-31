@@ -18,5 +18,6 @@ sudo certbot --apache -d gesnetwork.io
 sudo systemctl status certbot.timer
 for nginx
 sudo certbot --nginx -d example.com -d www.example.com
+certbot --nginx -d gesglobal.live -d www.gesglobal.live
 
 
