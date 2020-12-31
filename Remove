@@ -1,0 +1,60 @@
+REMOVE LETSCRYPT
+When deleting SSL certificates, it’s not about deleting merely one file manually. You would need to go through at least the following directories and delete the files associated with the domain name.
+    /etc/letsencrypt/archive
+    /etc/letsencrypt/live
+    /etc/letsencrypt/renewal
+
+    rm -rf /etc/letsencrypt/live/${DOMAIN}
+    rm /etc/letsencrypt/renewal/${DOMAIN}.conf
+find /etc/letsencrypt/ -name "*mydomain*"
+
+rm -rf /etc/letsencrypt/live/${DOMAIN}
+rm -rf /etc/letsencrypt/renewal/${DOMAIN}.conf
+rm -rf /etc/letsencrypt/archive/${DOMAIN}
+
+certbot certificates
+certbot delete
+
+certbot delete --cert-name gfin.vn
+
+sudo rm -rf /etc/letsencrypt/{live,renewal,archive}/{${DOMAIN},${DOMAIN}.conf}
+
+
+sudo apt-get remove python-certbot-apache
+sudo apt-get purge --auto-remove python-certbot-apache
+sudo apt-get remove  python3-certbot-apache
+sudo apt-get purge --auto-remove python3-certbot-apache
+
+
+
+Remove Certbot
+sudo certbot delete
+
+    Remove Certbot's Apache package
+    sudo apt purge python-certbot-apache
+
+    Disable the SSL config file created by certbot
+    sudo a2dissite 000-default-le-ssl.conf
+
+    Remove certbot files manually
+    sudo rm -rf /etc/letsencrypt/
+    sudo rm -rf /var/lib/letsencrypt/
+    sudo rm -rf /var/log/letsencrypt/
+
+    Make sure the repo is updated and autoremove
+    sudo apt update
+    sudo apt upgrade
+    sudo apt autoremove
+
+    Cautious: Additionally you can also reinstall apache2 if needed for fresh config files
+
+    sudo apt purge apache2
+    sudo service apache2 restart
+
+    If mods-available folder also completely get purged during apache2 removal process then PHP will not be executed and code will be displayed on the browser. Please follow the below process in such case,
+
+    sudo apt purge libapache2-mod-php7.2
+    sudo apt install libapache2-mod-php7.2
+    sudo a2enmod php7.2
+    sudo apachectl configtest
+    sudo service apache2 restart
