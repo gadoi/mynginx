@@ -13,9 +13,10 @@ rm -rf /etc/letsencrypt/renewal/${DOMAIN}.conf
 rm -rf /etc/letsencrypt/archive/${DOMAIN}
 
 certbot certificates
-certbot delete
-
 certbot delete --cert-name gfin.vn
+certbot delete
+certbot renew --dry-run
+
 
 sudo rm -rf /etc/letsencrypt/{live,renewal,archive}/{${DOMAIN},${DOMAIN}.conf}
 
