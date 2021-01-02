@@ -59,3 +59,14 @@ sudo certbot delete
     sudo a2enmod php7.2
     sudo apachectl configtest
     sudo service apache2 restart
+    
+    REMOVE NGINX
+    1. If you want to keep config files
+
+sudo apt-get remove nginx nginx-common
+
+2. If you want to uninstall completely
+
+sudo apt-get purge nginx nginx-common
+
+
