@@ -1,0 +1,68 @@
+log_format upstreamlog '$server_name to: $upstream_addr [$request]'
+   'upstream_response_time $upstream_response_time'
+   'msec $msec request_time $request_time';
+upstream mylb{
+   server localhost:3000;
+   server localhost:5000;
+}
+
+server {
+        listen 80 default_server;
+        listen [::]:80 default_server;
+        # SSL configuration
+        return 301 https://$host$request_uri;
+#       root /var/www/htm;
+#       root /var/www/mt;
+        server_name _;
+#       location / {
+        #try_files $uri $uri/ =404;
+        #proxy_pass http://localhost:3000/;
+        #proxy_pass http:/mylb;
+#               proxy_redirect off;
+#       proxy_buffering off;
+#                   proxy_set_header Host $host;
+#               proxy_set_header X-Real-IP $remote_addr;
+#                  proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+#        proxy_set_header X-Real-IP $remote_addr;
+#                               proxy_set_header Connection "upgrade";
+#        proxy_cache my_cache;
+#                               proxy_cache_use_stale error timeout updating http_500 http_502 http_503 http_504;
+#}
+        }
+server {
+              server_name luckylott.live; # managed by Certbot
+        access_log /var/log/nginx/access.log upstreamlog;
+        location / {
+                # First attempt to serve request as file, then
+                # as directory, then fall back to displaying a 404.
+#               try_files $uri $uri/ =404;
+#                proxy_pass http://localhost:3000/;
+                proxy_pass http://mylb;
+                proxy_redirect off;
+        #       proxy_buffering off;
+                proxy_set_header Host $host;
+                proxy_set_header X-Real-IP $remote_addr;
+                proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+                proxy_set_header X-Real-IP $remote_addr;
+                proxy_set_header Connection "upgrade";
+                proxy_cache my_cache;
+                proxy_cache_use_stale error timeout updating http_500 http_502 http_503 http_504;
+                }
+    listen [::]:443 ssl ipv6only=on; # managed by Certbot
+    listen 443 ssl; # managed by Certbot
+    ssl_certificate /etc/letsencrypt/live/luckylott.live/fullchain.pem; # managed by Certbot
+    ssl_certificate_key /etc/letsencrypt/live/luckylott.live/privkey.pem; # managed by Certbot
+    include /etc/letsencrypt/options-ssl-nginx.conf; # managed by Certbot
+    ssl_dhparam /etc/letsencrypt/ssl-dhparams.pem; # managed by Certbot
+
+}
+server {
+    if ($host = luckylott.live) {
+        return 301 https://$host$request_uri;
+    } # managed by Certbot
+
+
+        listen 80 ;
+        listen [::]:80 ;
+    server_name luckylott.live;
+    return 404; # managed by Certbot
