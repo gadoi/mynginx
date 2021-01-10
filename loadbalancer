@@ -1,3 +1,6 @@
+#Create Cache
+proxy_cache_path   /var/cache/nginx levels=1:2 keys_zone=my_cache:10m max_size=9000g inactive=1d;
+
 # Creat log
 log_format upstreamlog '$server_name to: $upstream_addr [$request]'
    'upstream_response_time $upstream_response_time'
@@ -38,3 +41,6 @@ server {
     include /etc/letsencrypt/options-ssl-nginx.conf; 
     ssl_dhparam /etc/letsencrypt/ssl-dhparams.pem; 
 }
+
+#soure: https://docs.nginx.com/nginx/deployment-guides/load-balance-third-party/node-js/#load-balancing-basic
+
