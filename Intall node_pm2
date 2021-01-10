@@ -1,0 +1,13 @@
+curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.37.1/install.sh | bash
+
+apt install npm
+
+command -v nvm
+node -v
+npm -v
+nvm ls
+
+INSTALL PM2 with npm
+nmp install pm2 -g
+pm2 -v
+
