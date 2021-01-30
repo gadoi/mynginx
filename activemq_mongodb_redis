@@ -1,0 +1,98 @@
+Install Activemq
+
+sudo apt update
+sudo apt-get install default-jre
+cd /tmp
+wget http://archive.apache.org/dist/activemq/5.16.1/apache-activemq-5.16.1-bin.tar.gz
+tar zxvf apache-activemq-5.16.1-bin.tar.gz 
+mv apache-activemq-5.16.1 /opt/activemq
+addgroup --quiet --system activemq
+adduser --quiet --system --ingroup activemq --no-create-home --disabled-password activemq
+chown -R activemq:activemq /opt/activemq
+vi /etc/systemd/system/activemq.service
+
+#####
+[Unit]
+Description=Apache ActiveMQ
+After=network.target
+[Service]
+Type=forking
+User=activemq
+Group=activemq
+
+ExecStart=/opt/activemq/bin/activemq start
+ExecStop=/opt/activemq/bin/activemq stop
+
+[Install]
+WantedBy=multi-user.target
+####
+
+systemctl daemon-reload 
+systemctl start activemq.service 
+systemctl enable activemq.service 
+systemctl status activemq.service 
+/opt/activemq/bin/activemq status
+systemctl restart activemq
+
+http://127.0.0.1:8161/admin/
+ufw allow 8161/tcp
+change localhost to internet
+vi /opt/activemq/conf/jetty.xml
+change 127.0.0.1 to 0.0.0.0
+ 
+https://webtips4u.com/guides/linux/learn-how-to-install-apache-activemq-on-ubuntu-20-04-18-04/
+ 
+_________
+ 
+INSTALL MONGODB
+ 
+curl -fsSL https://www.mongodb.org/static/pgp/server-4.4.asc | sudo apt-key add -
+
+apt-key list
+
+echo "deb [ arch=amd64,arm64 ] https://repo.mongodb.org/apt/ubuntu focal/mongodb-org/4.4 multiverse" | sudo tee /etc/apt/sources.list.d/mongodb-org-4.4.list
+sudo apt update
+sudo apt install mongodb-org
+sudo systemctl start mongod.service
+systemctl enable mongod
+
+#Test mongo
+mongo --eval 'db.runCommand({ connectionStatus: 1 })'
+
+https://www.digitalocean.com/community/tutorials/how-to-install-mongodb-on-ubuntu-20-04
+
+--------
+
+INSTALL REDIS
+apt install redis-server
+vi /etc/redis/redis.conf
+###
+supervised systemd
+####
+
+systemctl restart redis.service
+
+redis-cli
+ping
+PONG
+#Test Setting up Key-Value Pairs
+set mykey "You have successfully set up a key-value pair!"
+get mykey
+quit
+
+Security
+Set Up Redis Authentication
+vi /etc/redis/redis.conf
+###
+requirepass mypass
+####
+
+
+https://phoenixnap.com/kb/install-redis-on-ubuntu-20-04
+
+
+
+
+
+
+
