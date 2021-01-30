@@ -1,0 +1,17 @@
+GREP
+Search the first line
+grep admin /etc/passwd | head -1
+Search the end line
+grep root /etc/passwd | tail -1
+Search multi chair
+   1: grep -e "word1" -e "word2" <file>
+   2: grep "word1\|word2" <file> # \ để phân biệt word1 với word2
+   3: egrep "word1|word2" <file> 
+    
+Eg:
+netstat -tulpn | grep -e 8161 -e 6379 -e 27017 -e 2289
+netstat -tulpn | grep "8161\|6379\|27017\|2289"
+netstat -tulpn | egrep "2289|8161|6379|27017"
+
+
+
