@@ -14,4 +14,5 @@ netstat -tulpn | grep "8161\|6379\|27017\|2289"
 netstat -tulpn | egrep "2289|8161|6379|27017"
 
 
+https://news.cloud365.vn/su-dung-lenh-grep-trong-linux/
 
