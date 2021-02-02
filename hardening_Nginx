@@ -1,0 +1,5 @@
+1.Off version Nginx
+server_tokens off;
+2. Off clickjacking
+add_header X-Frame-Options "SAMEORIGIN";
+add_header X-XSS-Protection "1; mode=block";
