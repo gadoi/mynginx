@@ -1,5 +1,12 @@
 Forward from LEAKERHOUR(tele)
 
+Setup & Installation 🔧
+
+$ cd /opt && git clone https://github.com/epsylon/ufonet
+$ apt install python3-pycurl python3-geoip python3-whois python3-crypto python3-requests python3-scapy -y
+$ cd ufonet && python3 setup.py install
+$ python3 ufonet
+
 Let's find zombies 🧟‍♂️
 
 1️⃣. Method - Download Zombies
