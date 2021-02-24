@@ -7,6 +7,10 @@ sudo ufw allow <port>/<optional: protocol>
 Deny
 sudo ufw deny <port>/<optional: protocol>
 
+#Allow/Deny Port Ranges 
+sudo ufw allow 7100:7200/tcp
+sudo ufw deny 7100:7200/tcp
+
 Delete Existing Rule
 ufw deny 80/tcp
 sudo ufw delete deny 80/tcp
@@ -62,6 +66,29 @@ sudo ufw allow in on eth1 to any port 3306
 
 https://www.digitalocean.com/community/tutorials/ufw-essentials-common-firewall-rules-and-commands
 
+#Allow Specific IP Addresses
 ufw allow from 207.46.232.182
+
+#Allow Specific IP Addresses on Specific port 
+ufw allow from 64.63.62.61 to any port 22
+
+#Allow by specific port, IP address and protocol
+sudo ufw allow from <target> to <destination> port <port number> proto <protocol name>
+example: allow IP address 192.168.0.4 access to port 22 using TCP
+sudo ufw allow from 192.168.0.4 to any port 22 proto tcp
+
+#Allow Subnets 
+sudo ufw allow from 192.168.1.0/24 to any port 3306
+
+#Allow Connections to a Specific Network Interface
+sudo ufw allow in on eth2 to any port 3306
+
+Deny connections
+sudo ufw deny from 23.24.25.0/24
+sudo ufw deny from 23.24.25.0/24 to any port 80
+sudo ufw deny from 23.24.25.0/24 to any port 443
+
+
+
 
 
