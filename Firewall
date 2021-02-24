@@ -1,0 +1,67 @@
+UFW Essentials: Common Firewall Rules and Commands
+
+Allow and Deny (specific rules)
+Allow
+sudo ufw allow <port>/<optional: protocol>
+
+Deny
+sudo ufw deny <port>/<optional: protocol>
+
+Delete Existing Rule
+ufw deny 80/tcp
+sudo ufw delete deny 80/tcp
+
+Services
+less /etc/services
+#Allow by Service Name
+sudo ufw allow <service name>
+#Deny by Service Name
+sudo ufw deny <service name>
+eg:sudo ufw deny ssh
+
+
+#Block an IP Address
+sudo ufw deny from $IP
+eg:sudo ufw deny from 15.15.15.51
+
+#Block Connections to a Network Interface
+sudo ufw deny in on eth0 from $IP
+eg:sudo ufw deny in on eth0 from 15.15.15.51
+
+Service: SSH
+sudo ufw allow ssh
+sudo ufw allow 22
+
+#Allow Incoming SSH from Specific IP Address or Subnet
+To allow incoming SSH connections from a specific IP address or subnet, specify the source. For example, if you want to allow the entire 15.15.15.0/24 subnet, run this command:
+sudo ufw allow from 15.15.15.0/24  to any port 22
+
+#Allow Incoming Rsync from Specific IP Address or Subnet
+Rsync, which runs on port 873, can be used to transfer files from one computer to another.
+For example, if you want to allow the entire 15.15.15.0/24 subnet to be able to rsync to your server, run this command:
+sudo ufw allow from 15.15.15.0/24 to any port 873
+
+Service: Web Server
+#Allow All Incoming HTTP
+sudo ufw allow http
+sudo ufw allow 80
+
+#Allow All Incoming HTTPS
+sudo ufw allow https
+sudo ufw allow 443
+
+#Allow All Incoming HTTP and HTTPS
+sudo ufw allow proto tcp from any to any port 80,443
+
+Service: MySQL
+#Allow MySQL from Specific IP Address or Subnet
+sudo ufw allow from 15.15.15.0/24 to any port 3306
+
+#Allow MySQL to Specific Network Interface
+sudo ufw allow in on eth1 to any port 3306
+
+https://www.digitalocean.com/community/tutorials/ufw-essentials-common-firewall-rules-and-commands
+
+ufw allow from 207.46.232.182
+
+
