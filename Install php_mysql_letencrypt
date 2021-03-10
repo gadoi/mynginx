@@ -30,3 +30,5 @@ crontab -e
 
 
 https://websiteforstudents.com/setup-lets-encrypt-wildcard-on-ubuntu-20-04-18-04/
+Test SSL
+https://www.ssllabs.com/ssltest/
