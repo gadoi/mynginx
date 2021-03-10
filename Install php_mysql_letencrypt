@@ -20,4 +20,11 @@ for nginx
 sudo certbot --nginx -d example.com -d www.example.com
 certbot --nginx -d gesglobal.live -d www.gesglobal.live
 
+apt-get install letsencrypt
+certbot certonly --manual --preferred-challenges=dns --email chienhm@cybermedia.co --server https://acme-v02.api.letsencrypt.org/directory --agree-tos -d max365.vip -d *.max365.vip
+certbot certificates
+crontab -e
+0 1 * * * /usr/bin/certbot renew >> /var/log/letsencrypt/renew.log
 
+
+https://websiteforstudents.com/setup-lets-encrypt-wildcard-on-ubuntu-20-04-18-04/
