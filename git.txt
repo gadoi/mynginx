@@ -52,3 +52,10 @@ git config user.email "intheend00@yahoo.com"
 git config user.name "gadoi"
 git commit -m "test"
 git push
+
+Error: Push declined due to email privacy restrictions
+git config --global user.email "ID+tango4567@users.noreply.github.com"
+git rebase -i
+git commit --amend --reset-author
+git rebase --continue
+git push
