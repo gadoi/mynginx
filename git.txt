@@ -1,0 +1,47 @@
+1. Git init
+#Tao mot repository moi
+git init
+2. Git clone
+# Sao chep (clone) mot repository.
+git clone https://$
+# Neu repository o may chu khac
+git clone $username@$domain_or_IP:/path/repository
+3. git branch
+# Kiem tra nhanh
+git branch
+# Tao nhanh moi
+git branch $tennhanh
+# Xoa nhanh
+git branch -d
+4. Git checkout
+# Chuyen nhanh
+git checkout $tennhanh
+ex: tao nhanh moi:
+git checkout -b test
+# tro lai nhanh master
+git checkout master
+5. Git add
+# Cap nhat tinh trang cac file(them, xoa, sua) 
+# Cap nhat tat ca
+git add *.
+# Cap nhat cac file co dang
+git add *.<tenduoi>
+# Cap nhat file theo ten
+git add <ten file 1> [<ten file 2> ...<ten file n>]
+6. git commit
+# Xac nhan vaf luu nhung thay doi cua project 
+git commit -m "ghi chu"
+7. Git push
+# Cap nhat nhung thay doi cua project va gui len server
+git push origin <ten nhanh>
+# Neu chua clone mot repository hien co va muon ket noi repository den may chu
+remote, them
+git branch
+git remote add origin <server>
+8. git fetch
+# Lay source moi nhat tren server ve de len source hien tai tren local
+git fetch <ten nhanh>
+9. git pull
+# Lay source moi nhat tren server ve vaf tien hanh tron
+git pull <ten nhanh>
+
