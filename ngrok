@@ -1,0 +1,16 @@
+My Ngrok with account Github
+./ngrok authtoken 1lAlgpCbnabmyOYCg1wJKzLV5SX_TK9oV519MFTecMf5K458
+ngrok tcp 22
+
+ex:
+Session Status                online                                                                                    Account                       gadoi (Plan: Free)                                                                        Version                       2.3.35                                                                                    Region                        United States (us)       
+Web Interface                 http://127.0.0.1:4040                                                                     
+Forwarding                    tcp://4.tcp.ngrok.io:18101 -> localhost:22 
+
+ex: 
+ssh -p $port $username@$tcp
+ex: ssh iamshadow@4.tcp.ngrok.io -p 18101
+
+scp 
+scp -P 18101 *.conf iamshadow@4.tcp.ngrok.io:G:
+
