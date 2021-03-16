@@ -45,3 +45,10 @@ git fetch <ten nhanh>
 # Lay source moi nhat tren server ve vaf tien hanh tron
 git pull <ten nhanh>
 
+EX:
+vim test.txt
+git add test.txt
+git config user.email "intheend00@yahoo.com"
+git config user.name "gadoi"
+git commit -m "test"
+git push
