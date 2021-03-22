@@ -3,3 +3,9 @@ server_tokens off;
 2. Off clickjacking
 add_header X-Frame-Options "SAMEORIGIN";
 add_header X-XSS-Protection "1; mode=block";
+
+#Config Cors
+
+location ~* \.(eot|ttf|woff|woff2)$ {
+    add_header Access-Control-Allow-Origin *;
+}
