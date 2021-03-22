@@ -9,3 +9,5 @@ add_header X-XSS-Protection "1; mode=block";
 location ~* \.(eot|ttf|woff|woff2)$ {
     add_header Access-Control-Allow-Origin *;
 }
+
+https://serverfault.com/questions/162429/how-do-i-add-access-control-allow-origin-in-nginx
