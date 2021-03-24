@@ -28,3 +28,5 @@ Edit block server
       gzip off;
       
 
+Add record CAA
+https://sslmate.com/caa/
