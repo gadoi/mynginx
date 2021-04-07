@@ -59,3 +59,13 @@ git rebase -i
 git commit --amend --reset-author
 git rebase --continue
 git push
+
+GIT SUBMODULE
+# git trực tiếp
+git clone —recursive <git>
+
+#trong repo đã clone
+git submodule update --init 
+
+
+
