@@ -147,6 +147,12 @@ rabbitmqctl list_user_permissions user
 #Delete user permissions:
 rabbitmqctl clear_permissions -p /myvhost user
 
+Ex:
+RMQ_URI=amqp://cardgame:c4rdg4m3@localhost:5672/cardgame
+
+rabbitmqctl add_user cardgame c4rdg4m3
+rabbitmqctl set_user_tags cardgame administrator
+rabbitmqctl set_permissions -p /my_vhost cardgame ".*" ".*" ".*"
 https://computingforgeeks.com/how-to-install-latest-rabbitmq-server-on-ubuntu-linux/
 
 
