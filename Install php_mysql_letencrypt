@@ -47,6 +47,7 @@ EX2:
 sudo certbot --server https://acme-v02.api.letsencrypt.org/directory -d *.waglerocks.com --manual --preferred-challenges dns-01 certonly
 
 https://websiteforstudents.com/setup-lets-encrypt-wildcard-on-ubuntu-20-04-18-04/
+https://developerinsider.co/how-to-create-and-auto-renew-lets-encrypt-wildcard-certificate/
 
 Test SSL
 https://www.ssllabs.com/ssltest/
