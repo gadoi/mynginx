@@ -31,7 +31,7 @@ crontab -e
 #Auto Renewal
 certbot renew --dry-run
 
-
+EX:
 [shell]
 $ wget https://dl.eff.org/certbot-auto
 $ chmod a+x ./certbot-auto
@@ -42,7 +42,9 @@ sudo ./certbot-auto certonly \
 --server https://acme-v02.api.letsencrypt.org/directory \
 --manual --preferred-challenges dns \
 -d *.cloudynerd.us -d *.scm.cloudynerd.us
-[/shell]
+
+EX2:
+sudo certbot --server https://acme-v02.api.letsencrypt.org/directory -d *.waglerocks.com --manual --preferred-challenges dns-01 certonly
 
 https://websiteforstudents.com/setup-lets-encrypt-wildcard-on-ubuntu-20-04-18-04/
 
