@@ -11,3 +11,6 @@ server {
 }
 
 
+#error "part of this page is not secure (such as images) nginx"
+
+add_header 'Content-Security-Policy' 'upgrade-insecure-requests';
