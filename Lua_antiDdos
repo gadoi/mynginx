@@ -1,0 +1,36 @@
+
+vi /etc/sysctl.conf
+# Enable TCP SYN cookie protection & TCP SYN Flood Protection
+net.ipv4.tcp_syncookies = 1
+net.ipv4.tcp_max_syn_backlog = 2048
+net.ipv4.tcp_synack_retries = 3
+
+sysctl -p
+
+
+#Add Module Lua for Nginx .. incredible
+
+sudo systemctl disable nginx
+sudo systemctl stop nginx
+sudo apt-get -y install --no-install-recommends wget gnupg ca-certificates
+wget -O - https://openresty.org/package/pubkey.gpg | sudo apt-key add -
+
+echo "deb http://openresty.org/package/ubuntu $(lsb_release -sc) main" \
+    | sudo tee /etc/apt/sources.list.d/openresty.list
+    
+sudo apt-get update
+sudo apt-get -y install openresty
+ 
+apt install libnginx-mod-http-lua
+
+You already have a process bound to the HTTP port 80.
+lsof -i:80
+lsof -i:443
+#Try to stop the process which are using the port 80: 
+sudo fuser -k 80/tcp
+
+https://github.com/openresty/lua-nginx-module
+https://openresty.org/en/linux-packages.html#ubuntu
+https://github.com/C0nw0nk/Nginx-Lua-Anti-DDoS
+https://github.com/fabiocicerchia/nginx-lua
+https://github.com/titansec/OpenWAF
