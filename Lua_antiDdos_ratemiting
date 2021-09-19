@@ -1,4 +1,3 @@
-
 vi /etc/sysctl.conf
 # Enable TCP SYN cookie protection & TCP SYN Flood Protection
 net.ipv4.tcp_syncookies = 1
@@ -7,6 +6,19 @@ net.ipv4.tcp_synack_retries = 3
 
 sysctl -p
 
+#config Rate miting for Nginx
+http {
+# Rate limit for anti Ddos
+limit_req_zone $request_uri zone=test_zone:10m rate=360r/s;
+limit_req_zone $binary_remote_addr zone=test_zone2:10m rate=60r/s;
+
+ location / {
+         limit_req zone=test_zone burst=20 nodelay;
+        limit_req zone=test_zone2 burst=5;
+        }
+        
+http://nginx.org/en/docs/http/ngx_http_limit_req_module.html
+https://www.nginx.com/blog/rate-limiting-nginx/
 
 #Add Module Lua for Nginx .. incredible
 
