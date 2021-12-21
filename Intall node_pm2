@@ -11,7 +11,21 @@ INSTALL PM2 with npm
 nmp install pm2 -g
 pm2 -v
 
-Install new version
+Install new version 16
 curl -sL https://deb.nodesource.com/setup_16.x | sudo -E bash -
 sudo apt install nodejs
 node --version
+
+
+Node.js v17.x:
+
+# Using Ubuntu
+curl -fsSL https://deb.nodesource.com/setup_17.x | sudo -E bash -
+sudo apt-get install -y nodejs
+
+# Using Debian, as root
+curl -fsSL https://deb.nodesource.com/setup_17.x | bash -
+apt-get install -y nodejs
+
+
+https://github.com/nodesource/distributions/blob/master/README.md
