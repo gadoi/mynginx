@@ -44,13 +44,13 @@ https://webtips4u.com/guides/linux/learn-how-to-install-apache-activemq-on-ubunt
  
 _________
  
-INSTALL MONGODB
+INSTALL MONGODB 5.0
  
-curl -fsSL https://www.mongodb.org/static/pgp/server-4.4.asc | sudo apt-key add -
-
+curl -fsSL https://www.mongodb.org/static/pgp/server-5.0.asc | sudo apt-key add -
 apt-key list
 
-echo "deb [ arch=amd64,arm64 ] https://repo.mongodb.org/apt/ubuntu focal/mongodb-org/4.4 multiverse" | sudo tee /etc/apt/sources.list.d/mongodb-org-4.4.list
+echo "deb [ arch=amd64,arm64 ] https://repo.mongodb.org/apt/ubuntu focal/mongodb-org/5.0 multiverse" | sudo tee /etc/apt/sources.list.d/mongodb-org-5.0.list
+
 sudo apt update
 sudo apt install mongodb-org
 sudo systemctl start mongod.service
