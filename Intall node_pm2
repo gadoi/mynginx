@@ -10,7 +10,7 @@ apt-get install -y nodejs
 
 
 INSTALL PM2 with npm
-nmp install pm2 -g
+npm install pm2 -g
 pm2 -v
 
 command -v nvm
