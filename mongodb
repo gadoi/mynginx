@@ -1,0 +1,39 @@
+Install mongodb in ubuntu 22.04
+
+apt install wget curl gnupg2 software-properties-common apt-transport-https ca-certificates lsb-release
+curl -fsSL https://www.mongodb.org/static/pgp/server-6.0.asc|sudo gpg --dearmor -o /etc/apt/trusted.gpg.d/mongodb-6.gpg
+echo "deb [ arch=amd64,arm64 ] https://repo.mongodb.org/apt/ubuntu $(lsb_release -cs)/mongodb-org/6.0 multiverse" | sudo tee /etc/apt/sources.list.d/mongodb-org-6.0.list
+wget http://security.ubuntu.com/ubuntu/pool/main/o/openssl/libssl1.1_1.1.1f-1ubuntu2.17_amd64.deb
+apt update
+apt install mongodb-org
+systemctl enable --now mongod
+systemctl status mongod
+
+Create User with db admin
+mongosh
+use admin
+db.createUser(
+{
+user: "onewayuser",
+pwd: passwordPrompt(), // or cleartext password
+roles: [ { role: "userAdminAnyDatabase", db: "admin" }, "readWriteAnyDatabase" ]
+}
+)
+
+#Create database, user with database simple
+use onewaytest 
+db.createUser(
+{
+	user: "onewayuser",
+	pwd: "Password@1345$test",
+	roles:[{role: "userAdmin" , db:"onewaytest"}]})
+
+Create user without Role
+use test
+db.createUser(
+   {
+     user: "mynewuser",
+     pwd: "myuser123",
+     roles: [ "readWrite", "dbAdmin" ]
+   }
+);
