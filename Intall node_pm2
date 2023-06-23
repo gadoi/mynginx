@@ -1,4 +1,4 @@
-Node.js v17.x:
+Node.js v18.x:
 
 # Using Ubuntu
 curl -fsSL https://deb.nodesource.com/setup_18.x | sudo -E bash -
