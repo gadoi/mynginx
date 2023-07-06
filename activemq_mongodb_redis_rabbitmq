@@ -44,23 +44,22 @@ https://webtips4u.com/guides/linux/learn-how-to-install-apache-activemq-on-ubunt
  
 _________
  
-INSTALL MONGODB 5.0
+INSTALL MONGODB 6.0
  
-curl -fsSL https://www.mongodb.org/static/pgp/server-5.0.asc | sudo apt-key add -
-apt-key list
-
-echo "deb [ arch=amd64,arm64 ] https://repo.mongodb.org/apt/ubuntu focal/mongodb-org/5.0 multiverse" | sudo tee /etc/apt/sources.list.d/mongodb-org-5.0.list
-
+sudo apt install wget curl gnupg2 software-properties-common apt-transport-https ca-certificates lsb-release
+curl -fsSL https://www.mongodb.org/static/pgp/server-6.0.asc|sudo gpg --dearmor -o /etc/apt/trusted.gpg.d/mongodb-6.gpg
+echo "deb [ arch=amd64,arm64 ] https://repo.mongodb.org/apt/ubuntu $(lsb_release -cs)/mongodb-org/6.0 multiverse" | sudo tee /etc/apt/sources.list.d/mongodb-org-6.0.list
 sudo apt update
 sudo apt install mongodb-org
-sudo systemctl start mongod.service
-systemctl enable mongod
+sudo systemctl enable --now mongod
+sudo systemctl status mongod
+mongod --version
 
 #Test mongo
 mongo --eval 'db.runCommand({ connectionStatus: 1 })'
 
-https://www.digitalocean.com/community/tutorials/how-to-install-mongodb-on-ubuntu-20-04
 
+https://www.fosstechnix.com/how-to-install-mongodb-on-ubuntu-22-04-lts/
 --------
 
 INSTALL REDIS
