@@ -1,0 +1,50 @@
+wget https://www.phpmyadmin.net/downloads/phpMyAdmin-latest-all-languages.zip
+unzip phpMyAdmin-latest-all-languages.zip
+mv phpMyAdmin-5.2.0-all-languages /var/www/phpmyadmin
+chown -R www-data:www-data /var/www/phpmyadmin
+mysql -u root
+CREATE DATABASE phpmyadmin DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+GRANT ALL ON phpmyadmin.* TO 'phpmyadmin'@'localhost' IDENTIFIED BY 'your_preferred_password';
+FLUSH PRIVILEGES;
+EXIT;
+
+sudo apt install php-imagick php-phpseclib php-php-gettext php8.1-common php8.1-mysql php8.1-gd php8.1-imap php8.1-curl php8.1-zip php8.1-xml php8.1-mbstring php8.1-bz2 php8.1-intl php8.1-gmp
+
+nano /etc/nginx/conf.d/phpmyadmin.conf
+
+##########
+server {
+  listen 80;
+  listen [::]:80;
+  server_name pma.example.com;
+  root /var/www/phpmyadmin/;
+  index index.php index.html index.htm index.nginx-debian.html;
+
+  access_log /var/log/nginx/phpmyadmin_access.log;
+  error_log /var/log/nginx/phpmyadmin_error.log;
+
+  location / {
+    try_files $uri $uri/ /index.php;
+  }
+
+  location ~ ^/(doc|sql|setup)/ {
+    deny all;
+  }
+
+  location ~ \.php$ {
+    fastcgi_pass unix:/run/php/php8.1-fpm.sock;
+    fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
+    include fastcgi_params;
+    include snippets/fastcgi-php.conf;
+  }
+
+systemctl reload nginx
+
+https://www.linuxbabe.com/linux-server/install-phpmyadmin-nginx-ubuntu-22-04
+
+
+  location ~ /\.ht {
+    deny all;
+  }
+}
+##########
