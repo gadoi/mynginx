@@ -1,11 +1,11 @@
 Node.js v18.x:
 
 # Using Ubuntu
-curl -fsSL https://deb.nodesource.com/setup_18.x | sudo -E bash -
+curl -fsSL https://deb.nodesource.com/setup_18.x | sudo -E bash - &&\
 sudo apt-get install -y nodejs
 
 # Using Debian, as root
-curl -fsSL https://deb.nodesource.com/setup_18.x | bash -
+curl -fsSL https://deb.nodesource.com/setup_18.x | bash - &&\
 apt-get install -y nodejs
 
 
