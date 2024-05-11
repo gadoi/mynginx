@@ -131,10 +131,10 @@ rabbitmqctl list_vhosts
 rabbitmqctl delete_vhost /myvhost
 
 #Grant user permissions for vhost:
-rabbitmqctl set_permissions -p /myvhost user ".*" ".*" ".*"
+rabbitmqctl set_permissions -p /my_vhost user ".*" ".*" ".*"
 
 #List vhost permissions:
-rabbitmqctl list_permissions -p /myvhost
+rabbitmqctl list_permissions -p /my_vhost
 
 #To list user permissions:
 rabbitmqctl list_user_permissions user
