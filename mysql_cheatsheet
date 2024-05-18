@@ -142,9 +142,20 @@ $ mysqldump --opt -u root -p 123456a@Cyber nextcloud |  gzip -9 > nextcloud_db_b
 If you want to extract the .gz file, use the command below:
 $ gunzip customers_db_backup.sql.gz
 
+
 _____
 
 Restore Db
 mysql -u username -p dbname < dbexport.sql
 eg:
 mysql -u wordpress -p wordpress < wordpress.sql 
+
+
+______
+
+#Change password to mysql_native_password:
+ALTER USER 'admin'@'localhost' IDENTIFIED BY 'password' PASSWORD EXPIRE NEVER; ALTER USER 'admin'@'localhost' IDENTIFIED WITH mysql_native_password BY '9Nztk5TYMdHggYbJ';
+
+#Change host to "localhost" to "%"
+UPDATE mysql.user SET Host='%' WHERE Host='localhost' AND User='admin';
+SELECT User, Host FROM mysql.user;
