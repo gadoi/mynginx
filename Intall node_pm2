@@ -19,3 +19,9 @@ npm -v
 nvm ls
 
 https://github.com/nodesource/distributions/blob/master/README.md
+
+Install NVM
+curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.7/install.sh | bash
+wget -qO- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.7/install.sh | bash
+
+https://github.com/nvm-sh/nvm#install--update-script
